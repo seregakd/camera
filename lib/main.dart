@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
+import 'package:platform/platform.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,7 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
+  Platform _platform = const LocalPlatform();
 
   @override
   void initState() {
@@ -75,14 +77,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         onPressed: () async {
           try {
             await _initializeControllerFuture;
-/*
-            final path = join(
-              (await getApplicationDocumentsDirectory()).path,
-              '${DateTime.now()}.png',
-            );
-*/
-            final Directory extDir = await getApplicationDocumentsDirectory();
-            final String dirPath = '${extDir.path}/Pictures';
+
+            Directory _extDir;
+            if (_platform.isIOS) {
+              _extDir = await getApplicationDocumentsDirectory();
+            } else {
+              _extDir = await getExternalStorageDirectory();
+            }
+            final String dirPath = '${_extDir.path}/Pictures';
             await Directory(dirPath).create(recursive: true);
             final path = join(dirPath,'${DateTime.now()}.jpg');
 
