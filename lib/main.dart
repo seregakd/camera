@@ -59,44 +59,35 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Take a picture')),
-      // Wait until the controller is initialized before displaying the
-      // camera preview. Use a FutureBuilder to display a loading spinner
-      // until the controller has finished initializing.
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            // If the Future is complete, display the preview.
             return CameraPreview(_controller);
           } else {
-            // Otherwise, display a loading indicator.
             return Center(child: CircularProgressIndicator());
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
-        // Provide an onPressed callback.
-        onPressed: () async {
-          // Take the Picture in a try / catch block. If anything goes wrong,
-          // catch the error.
-          try {
-            // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
 
-            // Construct the path where the image should be saved using the
-            // pattern package.
+        onPressed: () async {
+          try {
+            await _initializeControllerFuture;
+/*
             final path = join(
-              // Store the picture in the temp directory.
-              // Find the temp directory using the `path_provider` plugin.
-              (await getTemporaryDirectory()).path,
+              (await getApplicationDocumentsDirectory()).path,
               '${DateTime.now()}.png',
             );
+*/
+            final Directory extDir = await getApplicationDocumentsDirectory();
+            final String dirPath = '${extDir.path}/Pictures';
+            await Directory(dirPath).create(recursive: true);
+            final path = join(dirPath,'${DateTime.now()}.jpg');
 
-            // Attempt to take a picture and log where it's been saved.
             await _controller.takePicture(path);
 
-            // If the picture was taken, display it on a new screen.
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -104,7 +95,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               ),
             );
           } catch (e) {
-            // If an error occurs, log the error to the console.
             print(e);
           }
         },
@@ -113,7 +103,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   }
 }
 
-// A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
 
@@ -123,8 +112,7 @@ class DisplayPictureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Display the Picture')),
-      // The image is stored as a file on the device. Use the `Image.file`
-      // constructor with the given path to display the image.
+
       body: Image.file(File(imagePath)),
     );
   }
