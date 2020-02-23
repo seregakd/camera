@@ -10,12 +10,41 @@ Future<void> main() async {
   final cameras = await availableCameras();
   final firstCamera = cameras.first;
 
-  runApp(
-    MaterialApp(
+  runApp(MyApp(firstCamera));
+}
+
+class MyApp extends StatelessWidget {
+  final CameraDescription camera;
+
+  MyApp(this.camera);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TakePictureScreen(
-        camera: firstCamera,
-      ),
-    ),
-  );
+      initialRoute: '/',
+      routes: {
+        '/':(context) => DisplayImage(),
+        '/takePicture':(context) => TakePictureScreen(camera: camera),
+      },
+    );
+  }
+}
+
+class DisplayImage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: Text('Display the picture')),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.camera_alt),
+            onPressed: () {
+              Navigator.pushNamed(context,'/takePicture');
+            },
+        )
+    );
+  }
 }
