@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 class DisplayImage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    String picturePath = ModalRoute.of(context).settings.arguments;
+    final String picturePath = ModalRoute.of(context).settings.arguments;
 
     if (picturePath != null) {
       return Scaffold(

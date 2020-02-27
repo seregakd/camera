@@ -66,7 +66,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             if (_platform.isIOS) {
               _extDir = await getApplicationDocumentsDirectory();
             } else {
-              _extDir = await getExternalStorageDirectory();
+//              _extDir = await getExternalStorageDirectory();
+              _extDir = await getTemporaryDirectory();
             }
             final String dirPath = '${_extDir.path}/Pictures';
             await Directory(dirPath).create(recursive: true);
@@ -74,31 +75,15 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             await _controller.takePicture(path);
 
+            Navigator.pop(context);
             Navigator.pushReplacementNamed(context, '/',
               arguments: path,
             );
-//            Navigator.push(context, MaterialPageRoute(
-//                builder: (context) => DisplayPictureScreen(imagePath: path),),);
           } catch (e) {
             print(e);
           }
         },
       ),
-    );
-  }
-}
-
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-
-  const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
-
-      body: Image.file(File(imagePath)),
     );
   }
 }
