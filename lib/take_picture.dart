@@ -74,12 +74,11 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             await _controller.takePicture(path);
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: path),
-              ),
+            Navigator.pushReplacementNamed(context, '/',
+              arguments: path,
             );
+//            Navigator.push(context, MaterialPageRoute(
+//                builder: (context) => DisplayPictureScreen(imagePath: path),),);
           } catch (e) {
             print(e);
           }

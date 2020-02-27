@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -34,17 +35,33 @@ class MyApp extends StatelessWidget {
 class DisplayImage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Display the picture')),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-        floatingActionButton: FloatingActionButton(
+    String picturePath = ModalRoute.of(context).settings.arguments;
+
+    if (picturePath != null) {
+      return Scaffold(
+          appBar: AppBar(title: Text('Display the picture')),
+          body: Center(
+            child: Image.file(File(picturePath)),
+          ),
+          floatingActionButton: FloatingActionButton(
             child: Icon(Icons.camera_alt),
             onPressed: () {
-              Navigator.pushNamed(context,'/takePicture');
+              Navigator.pushNamed(context, '/takePicture');
             },
-        )
-    );
+          )
+      );
+    } else {
+      return Scaffold(
+          appBar: AppBar(title: Text('Take a picture')),
+          floatingActionButton: Center(
+            child: FloatingActionButton(
+              child: Icon(Icons.camera_alt),
+              onPressed: () {
+                Navigator.pushNamed(context, '/takePicture');
+              },
+            )
+          ),
+      );
+    }
   }
 }
