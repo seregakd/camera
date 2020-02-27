@@ -7,14 +7,8 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'package:platform/platform.dart';
 
+
 class TakePictureScreen extends StatefulWidget {
-  final CameraDescription camera;
-
-  const TakePictureScreen({
-    Key key,
-    @required this.camera,
-  }) : super(key: key);
-
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
 }
@@ -27,12 +21,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
+    _initializeCamera();
+  }
+
+  Future<void> _initializeCamera() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+
     _controller = CameraController(
-      widget.camera,
+      firstCamera,
       ResolutionPreset.max,
     );
-
     _initializeControllerFuture = _controller.initialize();
+
+    setState(() {});
   }
 
   @override
