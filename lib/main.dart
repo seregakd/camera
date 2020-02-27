@@ -23,43 +23,49 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/displayPicture',
       routes: {
-        '/':(context) => DisplayImage(),
+        '/displayPicture':(context) => DisplayPicture(),
         '/takePicture':(context) => TakePictureScreen(camera: camera),
       },
     );
   }
 }
 
-class DisplayImage extends StatelessWidget{
+class DisplayPicture extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final String picturePath = ModalRoute.of(context).settings.arguments;
 
     if (picturePath != null) {
       return Scaffold(
-          appBar: AppBar(title: Text('Display the picture')),
-          body: Center(
-            child: Image.file(File(picturePath)),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.camera_alt),
-            onPressed: () {
-              Navigator.pushNamed(context, '/takePicture');
-            },
-          )
+        appBar: AppBar(title: Text('Display the picture')),
+        body: Center(
+          child: Image.file(File(picturePath)),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child:
+          Icon(Icons.camera_alt),
+          onPressed: () {
+            Navigator.pushNamed(context, '/takePicture');
+          },
+        )
       );
     } else {
       return Scaffold(
-          appBar: AppBar(title: Text('Take a picture')),
-          floatingActionButton: Center(
-            child: FloatingActionButton(
-              child: Icon(Icons.camera_alt),
-              onPressed: () {
-                Navigator.pushNamed(context, '/takePicture');
-              },
-            )
+        appBar: AppBar(title: Text('Take a picture')),
+        floatingActionButton:
+          Center(
+            child: SizedBox(
+              width: 80.0,
+              height: 80.0,
+              child: FloatingActionButton(
+                child: Icon(Icons.camera_alt),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/takePicture');
+                },
+              )
+            ),
           ),
       );
     }

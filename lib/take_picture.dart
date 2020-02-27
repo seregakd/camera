@@ -76,7 +76,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             await _controller.takePicture(path);
 
             Navigator.pop(context);
-            Navigator.pushReplacementNamed(context, '/',
+            Navigator.pushReplacementNamed(context, '/displayPicture',
               arguments: path,
             );
           } catch (e) {
@@ -84,6 +84,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           }
         },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
