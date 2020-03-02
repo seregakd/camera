@@ -10,7 +10,7 @@ class DisplayPicture extends StatelessWidget{
 
     if (picturePath != null) {
       return Scaffold(
-          appBar: AppBar(title: Text('Display the picture')),
+          appBar: AppBar(title: _buildTitle()),
           body: Center(
             child: Image.file(File(picturePath)),
           ),
@@ -42,3 +42,14 @@ class DisplayPicture extends StatelessWidget{
     }
   }
 }
+
+void _recognizeText(bool value) {
+
+}
+
+  Widget _buildTitle() {
+    return RaisedButton(
+      onPressed: () => _recognizeText,
+      child: Text('Recognize text'),
+    );
+  }
