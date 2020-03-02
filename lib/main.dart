@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_camera/take_picture.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
