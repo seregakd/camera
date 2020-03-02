@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "794912700523",
+    "firebase_url": "https://camera-41d9e.firebaseio.com",
+    "project_id": "camera-41d9e",
+    "storage_bucket": "camera-41d9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794912700523:android:8cb63f3ba04cb8851a192e",
+        "android_client_info": {
+          "package_name": "com.serohin.camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794912700523-kge7982li48qimdcj7b0i6dm96ethq0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJdae_moF2vYQ9KUvlVXh0SnHizFyutJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794912700523-kge7982li48qimdcj7b0i6dm96ethq0p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
