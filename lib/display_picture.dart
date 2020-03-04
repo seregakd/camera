@@ -44,30 +44,17 @@ class DisplayPicture extends StatelessWidget{
       );
     }
   }
-}
 
-void _recognizeText(String picturePath) {
-  final File imageFile = File(picturePath);
-  final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
-  final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
-/*
-  String text = visionText.text;
-  for (TextBlock block in visionText.blocks) {
-    final Rect boundingBox = block.boundingBox;
-    final List<Offset> cornerPoints = block.cornerPoints;
-    final String text = block.text;
-    final List<RecognizedLanguage> languages = block.recognizedLanguages;
+  Future<void> _recognizeText(String picturePath) async {
+    final File imageFile = File(picturePath);
+    final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
+    final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
+    final VisionText visionText = await textRecognizer.processImage(visionImage);
+    String text = visionText.text;
+    print("Recognizer  text:" + text);
 
-    for (TextLine line in block.lines) {
-      // Same getters as TextBlock
-      for (TextElement element in line.elements) {
-        // Same getters as TextBlock
-      }
-    }
+    textRecognizer.close();
   }
-*/
-  textRecognizer.close();
-}
 
   Widget _buildTitle([String picturePath]) {
     return RaisedButton(
@@ -75,3 +62,4 @@ void _recognizeText(String picturePath) {
       child: Text('Recognize text'),
     );
   }
+}
