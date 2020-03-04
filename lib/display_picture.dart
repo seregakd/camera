@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'Services.dart';
 
 class DisplayPicture extends StatelessWidget{
 //  File imageFile = null;
@@ -13,7 +14,7 @@ class DisplayPicture extends StatelessWidget{
     if (picturePath != null) {
  //     imageFile = File(picturePath);
       return Scaffold(
-          appBar: AppBar(title: _buildTitle(picturePath)),
+          appBar: AppBar(title: _buildTitle(context, picturePath)),
           body: Center(
             child: Image.file(File(picturePath)),
           ),
@@ -45,20 +46,21 @@ class DisplayPicture extends StatelessWidget{
     }
   }
 
-  Future<void> _recognizeText(String picturePath) async {
+  Future<void> _recognizeText(BuildContext context, String picturePath) async {
     final File imageFile = File(picturePath);
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
     final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
     final VisionText visionText = await textRecognizer.processImage(visionImage);
     String text = visionText.text;
+    viewShowDialog(context, text);
     print("Recognizer  text:" + text);
 
     textRecognizer.close();
   }
 
-  Widget _buildTitle([String picturePath]) {
+  Widget _buildTitle(BuildContext context, String picturePath) {
     return RaisedButton(
-      onPressed: () => _recognizeText(picturePath),
+      onPressed: () => _recognizeText(context, picturePath),
       child: Text('Recognize text'),
     );
   }
