@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>794912700523-9m11rs6toj98s3psbcqb5b0854qoksqp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.794912700523-9m11rs6toj98s3psbcqb5b0854qoksqp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCWGiQd7xYyQMMJv7VapYn_32020V7Y9g0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>794912700523</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.serohin.camera</string>
+	<key>PROJECT_ID</key>
+	<string>camera-41d9e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>camera-41d9e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:794912700523:ios:c92ba9c56722f1401a192e</string>
+	<key>DATABASE_URL</key>
+	<string>https://camera-41d9e.firebaseio.com</string>
+</dict>
+</plist>
