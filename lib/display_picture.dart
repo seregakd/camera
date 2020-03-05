@@ -5,15 +5,13 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'Services.dart';
 
 class DisplayPicture extends StatelessWidget{
-//  File imageFile = null;
 
   @override
   Widget build(BuildContext context) {
     final String picturePath = ModalRoute.of(context).settings.arguments;
 
     if (picturePath != null) {
- //     imageFile = File(picturePath);
-      return Scaffold(
+       return Scaffold(
           appBar: AppBar(title: _buildTitle(context, picturePath)),
           body: Center(
             child: Image.file(File(picturePath)),
