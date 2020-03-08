@@ -79,12 +79,14 @@ class TakePictureState extends State<TakePicture> {
             final path = join(dirPath,'${DateTime.now()}.jpg');
 
             await _controller.takePicture(path);
-//// replase Navigator
-//            Navigator.
-            Navigator.pop(context);
-            Navigator.pushReplacementNamed(context, widget.routDisplayPicture,
+
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              widget.routDisplayPicture,
+              (Route<dynamic> route) => false,
               arguments: path,
             );
+
           } catch (e) {
             print(e);
           }
