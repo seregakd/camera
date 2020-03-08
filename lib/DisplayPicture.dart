@@ -20,7 +20,7 @@ class DisplayPicture extends StatelessWidget{
             child:
             Icon(Icons.camera_alt),
             onPressed: () {
-              Navigator.pushNamed(context, '/takePicture');
+              Navigator.pushNamed(context, 'takePicture');
             },
           )
       );
@@ -35,7 +35,7 @@ class DisplayPicture extends StatelessWidget{
               child: FloatingActionButton(
                 child: Icon(Icons.camera_alt),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/takePicture');
+                  Navigator.pushNamed(context, 'takePicture');
                 },
               )
           ),

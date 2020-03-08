@@ -8,12 +8,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:platform/platform.dart';
 
 
-class TakePictureScreen extends StatefulWidget {
+class TakePicture extends StatefulWidget {
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  TakePictureState createState() => TakePictureState();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
+class TakePictureState extends State<TakePicture> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   Platform _platform = const LocalPlatform();
