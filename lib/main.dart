@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_camera/TakePicture.dart';
-import 'package:my_camera/DisplayPicture.dart';
+import 'package:my_camera/ui/TakePicture.dart';
+import 'package:my_camera/ui/DisplayPicture.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-import 'Services.dart';
+import '../Services.dart';
 
 class DisplayPicture extends StatelessWidget{
   final String routTakePicture;
