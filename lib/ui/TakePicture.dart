@@ -53,6 +53,7 @@ class TakePictureState extends State<TakePicture> {
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
+/// correct it IF
           if (snapshot.connectionState == ConnectionState.done) {
             return CameraPreview(_controller);
           } else {
@@ -63,10 +64,9 @@ class TakePictureState extends State<TakePicture> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
 
-        onPressed: () async {
+        onPressed: ()
+        async {
           try {
-            await _initializeControllerFuture;
-
             Directory _extDir;
             if (_platform.isIOS) {
               _extDir = await getApplicationDocumentsDirectory();
