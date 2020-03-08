@@ -7,8 +7,11 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'package:platform/platform.dart';
 
-
 class TakePicture extends StatefulWidget {
+  final String routDisplayPicture;
+
+  TakePicture({this.routDisplayPicture});
+
   @override
   TakePictureState createState() => TakePictureState();
 }
@@ -76,9 +79,10 @@ class TakePictureState extends State<TakePicture> {
             final path = join(dirPath,'${DateTime.now()}.jpg');
 
             await _controller.takePicture(path);
-
+//// replase Navigator
+//            Navigator.
             Navigator.pop(context);
-            Navigator.pushReplacementNamed(context, '/displayPicture',
+            Navigator.pushReplacementNamed(context, widget.routDisplayPicture,
               arguments: path,
             );
           } catch (e) {

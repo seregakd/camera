@@ -5,6 +5,9 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'Services.dart';
 
 class DisplayPicture extends StatelessWidget{
+  final String routTakePicture;
+
+  DisplayPicture({this.routTakePicture});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class DisplayPicture extends StatelessWidget{
             child:
             Icon(Icons.camera_alt),
             onPressed: () {
-              Navigator.pushNamed(context, 'takePicture');
+              Navigator.pushNamed(context, routTakePicture);
             },
           )
       );
@@ -35,7 +38,7 @@ class DisplayPicture extends StatelessWidget{
               child: FloatingActionButton(
                 child: Icon(Icons.camera_alt),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'takePicture');
+                  Navigator.pushNamed(context, routTakePicture);
                 },
               )
           ),
@@ -62,4 +65,5 @@ class DisplayPicture extends StatelessWidget{
       child: Text('Recognize text'),
     );
   }
+
 }

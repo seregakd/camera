@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: routDisplayPicture,
       routes: {
-        routDisplayPicture:(context) => DisplayPicture(),
-        routTakePicture:(context) => TakePicture(),
+        routDisplayPicture:(context) => DisplayPicture(routTakePicture: routTakePicture),
+        routTakePicture:(context) => TakePicture(routDisplayPicture: routDisplayPicture),
       },
     );
   }
