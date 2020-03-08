@@ -10,14 +10,15 @@ void main() async {
 
 class MyApp extends StatelessWidget {
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/displayPicture',
+      initialRoute: 'displayPicture',
       routes: {
-        '/displayPicture':(context) => DisplayPicture(),
-        '/takePicture':(context) => TakePictureScreen(),
+        'displayPicture':(context) => DisplayPicture(),
+        'takePicture':(context) => TakePictureScreen(),
       },
     );
   }
