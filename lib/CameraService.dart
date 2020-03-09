@@ -38,3 +38,13 @@ Future<void> getPicture(BuildContext context, bool platformIsIos,
 bool platformIsIos() {
   return LocalPlatform().isIOS;
 }
+
+Future<CameraController> getCameraController() async {
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+
+  return CameraController(
+    firstCamera,
+    ResolutionPreset.max,
+  );
+}
