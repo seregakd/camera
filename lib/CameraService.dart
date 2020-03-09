@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'package:platform/platform.dart';
 
-Future<void> getPicture(BuildContext context) async {
+Future<void> getPicture(BuildContext context, bool platformIsIos,
+    CameraController controller, String routDisplayPicture) async {
   try {
     Directory _extDir;
-    if (_platform.isIOS) {
+    if (platformIsIos) {
       _extDir = await getApplicationDocumentsDirectory();
     } else {
 //              _extDir = await getExternalStorageDirectory();
@@ -19,11 +21,11 @@ Future<void> getPicture(BuildContext context) async {
     await Directory(dirPath).create(recursive: true);
     final path = join(dirPath,'${DateTime.now()}.jpg');
 
-    await _controller.takePicture(path);
+    await controller.takePicture(path);
 
     Navigator.pushNamedAndRemoveUntil(
       context,
-      widget.routDisplayPicture,
+      routDisplayPicture,
           (Route<dynamic> route) => false,
       arguments: path,
     );

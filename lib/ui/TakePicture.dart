@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +61,7 @@ class TakePictureState extends State<TakePicture> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
-        onPressed: getPicture(context),
+        onPressed: () => getPicture(context, _platformIsIos, _controller, widget.routDisplayPicture),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
