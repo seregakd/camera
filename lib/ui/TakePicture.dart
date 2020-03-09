@@ -28,8 +28,15 @@ class TakePictureState extends State<TakePicture> {
   Future<void> _initializeCamera() async {
     _controller = getCameraController() as CameraController;
     _initializeControllerFuture = _controller.initialize();
-
     setState(() {});
+/*
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+*/
   }
 
   @override
