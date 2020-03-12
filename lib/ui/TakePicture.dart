@@ -37,6 +37,7 @@ class TakePictureState extends State<TakePicture> {
       setState(() {});
     });
 
+    setState(() {});
   }
 
   @override
@@ -71,6 +72,8 @@ class TakePictureState extends State<TakePicture> {
 
   @override
   Widget build(BuildContext context) {
+ //   if (!_controller.value.isInitialized) {
+    print ("_controller.value.isInitialized=" + _controller.value.isInitialized.toString());
     if (!_controller.value.isInitialized) {
       return Scaffold(
           appBar: AppBar(title: Text('Wait...')),
