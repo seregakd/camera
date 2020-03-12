@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_camera/ui/TakePicture.dart';
+import 'package:my_camera/ui/TakePicture2.dart';
 import 'package:my_camera/ui/DisplayPicture.dart';
 
 void main() async {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: routDisplayPicture,
       routes: {
         routDisplayPicture:(context) => DisplayPicture(routTakePicture: routTakePicture),
-        routTakePicture:(context) => TakePicture(routDisplayPicture: routDisplayPicture),
+        routTakePicture:(context) => TakePicture2(routDisplayPicture: routDisplayPicture),
       },
     );
   }

@@ -1,50 +1,34 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' show join;
-import 'package:path_provider/path_provider.dart';
-import 'package:platform/platform.dart';
 
-Future<void> getPicture(BuildContext context, bool platformIsIos,
-    CameraController controller, String routDisplayPicture) async {
-  try {
-    Directory _extDir;
-    if (platformIsIos) {
-      _extDir = await getApplicationDocumentsDirectory();
-    } else {
-//              _extDir = await getExternalStorageDirectory();
-      _extDir = await getTemporaryDirectory();
-    }
-    final String dirPath = '${_extDir.path}/Pictures';
-    await Directory(dirPath).create(recursive: true);
-    final path = join(dirPath,'${DateTime.now()}.jpg');
+import 'CameraService2.dart';
+import 'ui/TakePicture.dart';
 
-    await controller.takePicture(path);
+class CameraService extends StatelessWidget  {
+  final String routDisplayPicture;
 
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      routDisplayPicture,
-          (Route<dynamic> route) => false,
-      arguments: path,
-    );
-
-  } catch (e) {
-    print(e);
+  CameraService({this.routDisplayPicture}){
+    _initializeCamera();
   }
-}
 
-bool platformIsIos() {
-  return LocalPlatform().isIOS;
-}
+  Future<void> _initializeCamera() async {
+    CameraController _controller = await getCameraController();
 
-Future<CameraController> getCameraController() async {
-  final cameras = await availableCameras();
-  final firstCamera = cameras.first;
+    _controller.initialize().then((_) {
+/// pastle root to TakePicture
+      /// Navigator.pushReplacementNamed(context, '/displayPicture',
+      //              arguments: path,
+      //  );
+    });
+  }
 
-  return CameraController(
-    firstCamera,
-    ResolutionPreset.max,
-  );
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Wait...')),
+      body: Center(child: CircularProgressIndicator())
+    );
+  }
 }
