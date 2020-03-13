@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
-Future<void> getPicture(BuildContext context, bool platformIsIos,
-    CameraController controller, String routDisplayPicture) async {
+Future<void> getPicture(BuildContext context, CameraController controller,
+    bool platformIsIos, String routDisplayPicture) async {
   try {
     Directory _extDir;
     if (platformIsIos) {

@@ -5,9 +5,9 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import '../Services.dart';
 
 class DisplayPicture extends StatelessWidget{
-  final String routCameraService;
+  final String routInitCamera;
 
-  DisplayPicture({this.routCameraService});
+  DisplayPicture({this.routInitCamera});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class DisplayPicture extends StatelessWidget{
             child:
             Icon(Icons.camera_alt),
             onPressed: () {
-              Navigator.pushNamed(context, routCameraService);
+              Navigator.pushNamed(context, routInitCamera);
             },
           )
       );
@@ -38,7 +38,7 @@ class DisplayPicture extends StatelessWidget{
               child: FloatingActionButton(
                 child: Icon(Icons.camera_alt),
                 onPressed: () {
-                  Navigator.pushNamed(context, routCameraService);
+                  Navigator.pushNamed(context, routInitCamera);
                 },
               )
           ),

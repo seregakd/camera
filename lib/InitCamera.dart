@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 
 import 'CameraService.dart';
-import 'ui/TakePicture.dart';
 
 class InitCamera extends StatelessWidget  {
   final String routTakePicture;
+  final BuildContext context;
 
-  InitCamera({this.routTakePicture}){
+  InitCamera({this.routTakePicture, this.context}){
     _initializeCamera();
   }
 
@@ -17,10 +17,9 @@ class InitCamera extends StatelessWidget  {
     CameraController _controller = await getCameraController();
 
     _controller.initialize().then((_) {
-/// pastle root to TakePicture
-      /// Navigator.pushReplacementNamed(context, '/displayPicture',
-      //              arguments: path,
-      //  );
+       Navigator.pushReplacementNamed(context, routTakePicture,
+                    arguments: _controller,
+       );
     });
   }
 

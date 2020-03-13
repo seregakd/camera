@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -19,12 +17,6 @@ class TakePictureState extends State<TakePicture> {
   CameraController _controller;
 
   @override
-  void initState() {
-    super.initState();
-
-  }
-
-  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -32,12 +24,13 @@ class TakePictureState extends State<TakePicture> {
 
   @override
   Widget build(BuildContext context) {
+    _controller = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(title: Text('Take a picture')),
       body: CameraPreview(_controller),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
-        onPressed: () => getPicture(context, widget.platformIsIos, _controller, widget.routDisplayPicture),
+        onPressed: () => getPicture(context, _controller, widget.platformIsIos, widget.routDisplayPicture),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
