@@ -30,7 +30,10 @@ class TakePictureState extends State<TakePicture> {
       body: CameraPreview(_controller),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
-        onPressed: () => getPicture(context, _controller, widget.platformIsIos, widget.routDisplayPicture),
+        onPressed: () => getPicture(
+          context, _controller,
+          widget.platformIsIos,
+          widget.routDisplayPicture),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

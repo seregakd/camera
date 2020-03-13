@@ -23,12 +23,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: routDisplayPicture,
       routes: {
-        routDisplayPicture:(context) => DisplayPicture(routInitCamera: routInitCamera),
+        routDisplayPicture:(context) => DisplayPicture(
+          routInitCamera: routInitCamera
+        ),
         routTakePicture:(context) => TakePicture(
           routDisplayPicture: routDisplayPicture,
-          platformIsIos: _platformIsIos
+          platformIsIos: _platformIsIos,
         ),
-        routInitCamera:(context) => InitCamera(routTakePicture: routTakePicture, context: context),
+        routInitCamera:(context) => InitCamera(
+          routTakePicture: routTakePicture,
+          context: context,
+        ),
       },
     );
   }
