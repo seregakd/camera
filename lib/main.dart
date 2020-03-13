@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_camera/ui/TakePicture2.dart';
+import 'package:my_camera/ui/TakePicture.dart';
 import 'package:my_camera/ui/DisplayPicture.dart';
+import 'InitCamera.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,6 +12,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final String routDisplayPicture = "displayPicture";
   final String routTakePicture = "takePicture";
+  final String routInitCamera = "initCamera";
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: routDisplayPicture,
       routes: {
-        routDisplayPicture:(context) => DisplayPicture(routTakePicture: routTakePicture),
-        routTakePicture:(context) => TakePicture2(routDisplayPicture: routDisplayPicture),
+        routDisplayPicture:(context) => DisplayPicture(routCameraService: routInitCamera),
+        routTakePicture:(context) => TakePicture(routDisplayPicture: routDisplayPicture),
+        routInitCamera:(context) => InitCamera(routTakePicture: routTakePicture),
       },
     );
   }
