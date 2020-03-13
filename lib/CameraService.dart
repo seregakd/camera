@@ -25,7 +25,7 @@ Future<void> getPicture(BuildContext context, CameraController controller,
     Navigator.pushNamedAndRemoveUntil(
       context,
       routDisplayPicture,
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
       arguments: path,
     );
 
