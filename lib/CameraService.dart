@@ -36,10 +36,24 @@ Future<void> getPicture(BuildContext context, CameraController controller,
 
 Future<CameraController> getCameraController() async {
   final cameras = await availableCameras();
-  final firstCamera = cameras.first;
+  CameraDescription selectedCamera;
+
+  if (cameras.length > 0) {
+    for (CameraDescription camera in cameras) {
+        print("lensDirection=" + camera.lensDirection.toString() + "sensorOrientation=" + camera.sensorOrientation.toString());
+
+      if (camera.lensDirection.toString() == "back") {
+        selectedCamera = camera;
+//        break;
+      }
+    }
+    selectedCamera = cameras.first;
+  } else {
+    print("No camera available");
+  }
 
   return CameraController(
-    firstCamera,
+    selectedCamera,
     ResolutionPreset.max,
   );
 }

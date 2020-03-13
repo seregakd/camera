@@ -14,13 +14,16 @@ class InitCamera extends StatelessWidget  {
   }
 
   Future<void> _initializeCamera() async {
+    print("1");
     CameraController _controller = await getCameraController();
-
-    _controller.initialize().then((_) {
-       Navigator.pushReplacementNamed(context, routTakePicture,
-                    arguments: _controller,
-       );
-    });
+    print("2");
+    //   if (_controller != null) {
+      _controller.initialize().then((_) {
+        Navigator.pushReplacementNamed(context, routTakePicture,
+          arguments: _controller,
+        );
+      });
+ //   }
   }
 
   @override
