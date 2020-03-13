@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_camera/ui/TakePicture.dart';
 import 'package:my_camera/ui/DisplayPicture.dart';
+import 'Services.dart';
 import 'InitCamera.dart';
 
 void main() async {
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
   final String routTakePicture = "takePicture";
   final String routInitCamera = "initCamera";
 
+  final bool _platformIsIos = platformIsIos();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +24,10 @@ class MyApp extends StatelessWidget {
       initialRoute: routDisplayPicture,
       routes: {
         routDisplayPicture:(context) => DisplayPicture(routCameraService: routInitCamera),
-        routTakePicture:(context) => TakePicture(routDisplayPicture: routDisplayPicture),
+        routTakePicture:(context) => TakePicture(
+          routDisplayPicture: routDisplayPicture,
+          platformIsIos: _platformIsIos
+        ),
         routInitCamera:(context) => InitCamera(routTakePicture: routTakePicture),
       },
     );

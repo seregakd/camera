@@ -7,8 +7,9 @@ import '../CameraService.dart';
 
 class TakePicture extends StatefulWidget {
   final String routDisplayPicture;
+  final bool platformIsIos;
 
-  TakePicture({this.routDisplayPicture});
+  TakePicture({this.routDisplayPicture, this.platformIsIos});
 
   @override
   TakePictureState createState() => TakePictureState();
@@ -16,8 +17,6 @@ class TakePicture extends StatefulWidget {
 
 class TakePictureState extends State<TakePicture> {
   CameraController _controller;
-
-  final bool _platformIsIos = platformIsIos();
 
   @override
   void initState() {
@@ -38,7 +37,7 @@ class TakePictureState extends State<TakePicture> {
       body: CameraPreview(_controller),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
-        onPressed: () => getPicture(context, _platformIsIos, _controller, widget.routDisplayPicture),
+        onPressed: () => getPicture(context, widget.platformIsIos, _controller, widget.routDisplayPicture),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

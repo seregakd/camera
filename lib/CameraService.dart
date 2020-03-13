@@ -5,7 +5,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
-import 'package:platform/platform.dart';
 
 Future<void> getPicture(BuildContext context, bool platformIsIos,
     CameraController controller, String routDisplayPicture) async {
@@ -33,10 +32,6 @@ Future<void> getPicture(BuildContext context, bool platformIsIos,
   } catch (e) {
     print(e);
   }
-}
-
-bool platformIsIos() {
-  return LocalPlatform().isIOS;
 }
 
 Future<CameraController> getCameraController() async {

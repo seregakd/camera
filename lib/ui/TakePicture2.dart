@@ -17,7 +17,7 @@ class TakePicture2 extends StatefulWidget {
 class TakePicture2State extends State<TakePicture2> {
   CameraController _controller;
 ///  Future<void> _initializeControllerFuture;
-  final bool _platformIsIos = platformIsIos();
+///  final bool _platformIsIos = platformIsIos();
 
   @override
   void initState() {
@@ -85,7 +85,7 @@ class TakePicture2State extends State<TakePicture2> {
         body: CameraPreview(_controller),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.camera_alt),
-          onPressed: () => getPicture(context, _platformIsIos, _controller, widget.routDisplayPicture),
+ ///         onPressed: () => getPicture(context, _platformIsIos, _controller, widget.routDisplayPicture),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

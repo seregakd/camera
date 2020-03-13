@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform/platform.dart';
 
 void viewShowDialog(BuildContext context, String message){
   showDialog(
@@ -15,4 +16,8 @@ void viewShowDialog(BuildContext context, String message){
       ],
     ),
   );
+}
+
+bool platformIsIos() {
+  return LocalPlatform().isIOS;
 }
