@@ -15,7 +15,18 @@ class TakePicture extends StatefulWidget {
 
 class TakePictureState extends State<TakePicture> {
   CameraController _controller;
-
+/*
+  @override
+  void initState() {
+    super.initState();
+    _controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+  }
+*/
   @override
   void dispose() {
     _controller.dispose();
