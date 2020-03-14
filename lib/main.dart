@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_camera/ui/TakePicture.dart';
 import 'package:my_camera/ui/DisplayPicture.dart';
-import 'package:torch/torch.dart';
 import 'Services.dart';
 import 'ui/InitCamera.dart';
 
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
   final String routInitCamera = "initCamera";
 
   final bool _platformIsIos = platformIsIos();
-  final Future<bool> _hasTorch = Torch.hasTorch;
+//  final Future<bool> _hasTorch = Torch.hasTorch;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
         routTakePicture:(context) => TakePicture(
           routDisplayPicture: routDisplayPicture,
           platformIsIos: _platformIsIos,
-          hasTorch: _hasTorch,
+//          hasTorch: _hasTorch,
         ),
         routInitCamera:(context) => InitCamera(
           routTakePicture: routTakePicture,

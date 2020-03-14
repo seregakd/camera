@@ -1,15 +1,14 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:torch/torch.dart';
-
 import '../CameraService.dart';
+import 'package:lamp/lamp.dart';
 
 class TakePicture extends StatefulWidget {
   final String routDisplayPicture;
   final bool platformIsIos;
-  final Future<bool> hasTorch;
+//  final Future<bool> hasTorch;
 
-  TakePicture({this.routDisplayPicture, this.platformIsIos, this.hasTorch});
+  TakePicture({this.routDisplayPicture, this.platformIsIos});//, this.hasTorch});
 
   @override
   TakePictureState createState() => TakePictureState();
@@ -17,16 +16,17 @@ class TakePicture extends StatefulWidget {
 
 class TakePictureState extends State<TakePicture> {
   CameraController _controller;
-  bool torchOn = false;
+  bool _lampOn = false;
 
-  _setTorch(){
-    if (torchOn) {
-      Torch.turnOff();
-      torchOn = false;
-    } else {
-      Torch.turnOn();
-      torchOn = true;
-    }
+  _setLamp() {
+      if (_lampOn) {
+//          Lamp.turnOff();
+          _lampOn = false;
+      } else {
+//          Lamp.turnOn();
+          _lampOn = true;
+      }
+
   }
 
   @override
@@ -54,7 +54,7 @@ class TakePictureState extends State<TakePicture> {
 
   Widget _buildTitle(BuildContext context) {
     return RaisedButton(
-      onPressed: () => _setTorch,
+      onPressed: () => _setLamp(),
       child: Text('Torch ON/OFF'),
     );
   }
