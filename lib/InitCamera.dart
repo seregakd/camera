@@ -5,25 +5,37 @@ import 'package:camera/camera.dart';
 
 import 'CameraService.dart';
 
-class InitCamera extends StatelessWidget  {
+class InitCamera extends StatefulWidget  {
   final String routTakePicture;
-  final BuildContext context;
 
-  InitCamera({this.routTakePicture, this.context}){
-    _initializeCamera();
+  InitCamera({this.routTakePicture});
+
+    @override
+    InitCameraState createState() => InitCameraState();
   }
+
+  class InitCameraState extends State<InitCamera> {
+
+    @override
+    void initState() {
+      super.initState();
+        _initializeCamera();
+    }
 
   Future<void> _initializeCamera() async {
     print("1");
     CameraController _controller = await getCameraController();
     print("2");
-    //   if (_controller != null) {
-///      _controller.initialize().then((_) {
-        Navigator.pushReplacementNamed(context, routTakePicture,
+      _controller.initialize().then((_) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {});
+
+        Navigator.pushReplacementNamed(context, widget.routTakePicture,
           arguments: _controller,
         );
- ///     });
- //   }
+      });
   }
 
   @override

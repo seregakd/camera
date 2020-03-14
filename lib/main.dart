@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         ),
         routInitCamera:(context) => InitCamera(
           routTakePicture: routTakePicture,
-          context: context,
         ),
       },
     );
