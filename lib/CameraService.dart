@@ -13,7 +13,8 @@ Future<void> getPicture(BuildContext context, CameraController controller,
     if (platformIsIos) {
       _extDir = await getApplicationDocumentsDirectory();
     } else {
-//              _extDir = await getExternalStorageDirectory();
+    //  Saving to an external directory
+    //  extDir = await getExternalStorageDirectory();
       _extDir = await getTemporaryDirectory();
     }
     final String dirPath = '${_extDir.path}/Pictures';
@@ -36,24 +37,23 @@ Future<void> getPicture(BuildContext context, CameraController controller,
 
 Future<CameraController> getCameraController() async {
   final cameras = await availableCameras();
-  CameraDescription selectedCamera;
 
   if (cameras.length > 0) {
-    for (CameraDescription camera in cameras) {
-        print("lensDirection=" + camera.lensDirection.toString() + "sensorOrientation=" + camera.sensorOrientation.toString());
-
-      if (camera.lensDirection.toString() == "back") {
-        selectedCamera = camera;
-//        break;
-      }
-    }
-    selectedCamera = cameras.first;
+    return CameraController(
+      _selectBackCamera(cameras),
+      ResolutionPreset.max,
+    );
   } else {
     print("No camera available");
+    return null;
   }
+}
 
-  return CameraController(
-    selectedCamera,
-    ResolutionPreset.max,
-  );
+CameraDescription _selectBackCamera([List<CameraDescription> cameras]) {
+  for (CameraDescription camera in cameras) {
+    if (camera.lensDirection == CameraLensDirection.back) {
+      return camera;
+    }
+  }
+  return cameras.first;
 }
