@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
-import 'CameraService.dart';
+import '../CameraService.dart';
 
 class InitCamera extends StatefulWidget  {
   final String routTakePicture;
