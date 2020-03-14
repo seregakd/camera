@@ -14,28 +14,27 @@ class InitCamera extends StatefulWidget  {
     InitCameraState createState() => InitCameraState();
   }
 
-  class InitCameraState extends State<InitCamera> {
+class InitCameraState extends State<InitCamera> {
 
-    @override
-    void initState() {
-      super.initState();
-        _initializeCamera();
-    }
+  @override
+  void initState() {
+    super.initState();
+      _initializeCamera();
+  }
 
   Future<void> _initializeCamera() async {
-    print("1");
     CameraController _controller = await getCameraController();
-    print("2");
-      _controller.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
+    _controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
 
-        Navigator.pushReplacementNamed(context, widget.routTakePicture,
-          arguments: _controller,
-        );
-      });
+      Navigator.pushReplacementNamed(
+        context,
+        widget.routTakePicture,
+        arguments: _controller,
+      );
+    });
   }
 
   @override
