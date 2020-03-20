@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import '../CameraService.dart';
-import 'package:torch/torch.dart';
 
 class TakePicture extends StatefulWidget {
   final String routDisplayPicture;
@@ -19,10 +18,8 @@ class TakePictureState extends State<TakePicture> {
 
   _setLamp() {
       if (_lampOn) {
-        Torch.turnOff();
           _lampOn = false;
       } else {
-          Torch.turnOn();
           _lampOn = true;
       }
 
