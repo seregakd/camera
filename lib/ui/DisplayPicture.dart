@@ -6,8 +6,9 @@ import '../Services.dart';
 
 class DisplayPicture extends StatelessWidget{
   final String routInitCamera;
+  final String routCorrectPicture;
 
-  DisplayPicture({this.routInitCamera});
+  DisplayPicture({this.routInitCamera, this.routCorrectPicture});
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +61,16 @@ class DisplayPicture extends StatelessWidget{
   }
 
   Widget _buildTitle(BuildContext context, String picturePath) {
-    return RaisedButton(
-      onPressed: () => _recognizeText(context, picturePath),
-      child: Text('Recognize text'),
-    );
+    return Row(children: <Widget>[
+      RaisedButton(
+        onPressed: () => _recognizeText(context, picturePath),
+        child: Text('Recognize text'),
+      ),
+      RaisedButton(
+        onPressed: () => Navigator.pushNamed(context, routCorrectPicture, arguments: picturePath),
+        child: Text('Correct picture'),
+      ),
+    ]);
   }
 
   Widget _viewImage(String picturePath) {

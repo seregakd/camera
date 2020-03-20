@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_camera/ui/CorrectPicture.dart';
 import 'package:my_camera/ui/TakePicture.dart';
 import 'package:my_camera/ui/DisplayPicture.dart';
 import 'Services.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   final String routDisplayPicture = "displayPicture";
   final String routTakePicture = "takePicture";
   final String routInitCamera = "initCamera";
+  final String routCorrectPicture = "correctPicture";
 
   final bool _platformIsIos = platformIsIos();
 
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
 
       routes: {
         routDisplayPicture:(context) => DisplayPicture(
-          routInitCamera: routInitCamera
+          routInitCamera: routInitCamera,
+            routCorrectPicture: routCorrectPicture,
         ),
         routTakePicture:(context) => TakePicture(
           routDisplayPicture: routDisplayPicture,
@@ -34,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         routInitCamera:(context) => InitCamera(
           routTakePicture: routTakePicture,
+        ),
+        routCorrectPicture:(context) => CorrectPicture(
+          routDisplayPicture: routDisplayPicture
         ),
       },
     );
