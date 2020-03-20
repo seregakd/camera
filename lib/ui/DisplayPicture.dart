@@ -67,7 +67,12 @@ class DisplayPicture extends StatelessWidget{
   }
 
   Widget _viewImage(String picturePath) {
-    return AspectRatio(
+    return Center(
+      child: Image.file(File(picturePath)),
+    );
+
+/*
+      AspectRatio(
         aspectRatio: 487 / 451,
         child: Container(
             decoration: BoxDecoration(
@@ -78,11 +83,7 @@ class DisplayPicture extends StatelessWidget{
               ),
             )),
       );
-   /*
-      Center(
-      child: Image.file(File(picturePath)),
-    );
-   */
+ */
   }
 
 }
