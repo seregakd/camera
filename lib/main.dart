@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
   final String routInitCamera = "initCamera";
 
   final bool _platformIsIos = platformIsIos();
-//  final Future<bool> _hasTorch = Torch.hasTorch;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,6 @@ class MyApp extends StatelessWidget {
         routTakePicture:(context) => TakePicture(
           routDisplayPicture: routDisplayPicture,
           platformIsIos: _platformIsIos,
-//          hasTorch: _hasTorch,
         ),
         routInitCamera:(context) => InitCamera(
           routTakePicture: routTakePicture,
