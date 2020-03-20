@@ -19,7 +19,9 @@ class DisplayPicture extends StatelessWidget{
           appBar: AppBar(
               title: _buildTitle(context, picturePath)
           ),
-          body: _viewImage(picturePath), //Image.file(File(picturePath)),
+          body: Center(
+            child: Image.file(File(picturePath)),
+          ),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.camera_alt),
             onPressed: () {
@@ -72,25 +74,4 @@ class DisplayPicture extends StatelessWidget{
       ),
     ]);
   }
-
-  Widget _viewImage(String picturePath) {
-    return Center(
-      child: Image.file(File(picturePath)),
-    );
-
-/*
-      AspectRatio(
-        aspectRatio: 487 / 451,
-        child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fitWidth,
-                alignment: FractionalOffset.topCenter,
-                image: FileImage(File(picturePath)),
-              ),
-            )),
-      );
- */
-  }
-
 }
