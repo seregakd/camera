@@ -15,13 +15,12 @@ class DisplayPicture extends StatelessWidget{
 
     if (picturePath != null) {
        return Scaffold(
-          appBar: AppBar(title: _buildTitle(context, picturePath)),
-          body: Center(
-            child: Image.file(File(picturePath)),
+          appBar: AppBar(
+              title: _buildTitle(context, picturePath)
           ),
+          body: _viewImage(picturePath), //Image.file(File(picturePath)),
           floatingActionButton: FloatingActionButton(
-            child:
-            Icon(Icons.camera_alt),
+            child: Icon(Icons.camera_alt),
             onPressed: () {
               Navigator.pushNamed(context, routInitCamera);
             },
@@ -29,9 +28,10 @@ class DisplayPicture extends StatelessWidget{
       );
     } else {
       return Scaffold(
-        appBar: AppBar(title: Text('Take a picture')),
-        floatingActionButton:
-        Center(
+        appBar: AppBar(
+            title: Text('Take a picture')
+        ),
+        floatingActionButton: Center(
           child: SizedBox(
               width: 100.0,
               height: 100.0,
@@ -64,6 +64,25 @@ class DisplayPicture extends StatelessWidget{
       onPressed: () => _recognizeText(context, picturePath),
       child: Text('Recognize text'),
     );
+  }
+
+  Widget _viewImage(String picturePath) {
+    return AspectRatio(
+        aspectRatio: 487 / 451,
+        child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                alignment: FractionalOffset.topCenter,
+                image: FileImage(File(picturePath)),
+              ),
+            )),
+      );
+   /*
+      Center(
+      child: Image.file(File(picturePath)),
+    );
+   */
   }
 
 }
