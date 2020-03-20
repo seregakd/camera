@@ -24,13 +24,14 @@ class CorrectPictureState extends State<CorrectPicture>{
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.save),
-//        onPressed: () => ,
+        onPressed: () => Navigator.pushNamedAndRemoveUntil(
+          context,
+          widget.routDisplayPicture,
+          (Route<dynamic> route) => false,
+          arguments: picturePath,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
-
-      Center(
-      child: Image.file(File(picturePath)),
     );
   }
 
