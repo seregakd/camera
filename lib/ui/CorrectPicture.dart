@@ -11,7 +11,21 @@ class CorrectPicture extends StatefulWidget {
   CorrectPictureState createState() => CorrectPictureState();
 }
 
-class CorrectPictureState extends State<CorrectPicture>{
+class CorrectPictureState extends State<CorrectPicture> with TickerProviderStateMixin{
+  AnimationController _controller;
+  CurvedAnimation _curve;
+/*
+  final Tween<double> turnsTween = Tween<double>(
+    begin: 1,
+    end: 3,
+  );
+*/
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(duration: const Duration(milliseconds: 2000), vsync: this);
+    _curve = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +33,25 @@ class CorrectPictureState extends State<CorrectPicture>{
 
     return Scaffold(
       appBar: AppBar(title: Text("Correct picture")),
+//      body: Center(
+//        child: Image.file(File(picturePath)),
+//      ),
       body: Center(
-        child: Image.file(File(picturePath)),
+        child: GestureDetector(
+          child: RotationTransition(
+            turns: _curve,
+            child: Center(
+              child: Image.file(File(picturePath)),
+            ),
+          ),
+          onDoubleTap: () {
+            if (_controller.isCompleted) {
+              _controller.reverse();
+            } else {
+              _controller.forward();
+            }
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.save),
