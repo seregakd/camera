@@ -12,28 +12,11 @@ class CorrectPicture extends StatefulWidget {
   CorrectPictureState createState() => CorrectPictureState();
 }
 
-enum AppState {
-  free,
-  picked,
-  cropped,
-}
-
 class CorrectPictureState extends State<CorrectPicture> {
-  AppState state;
   File imageFile;
-//  File sourceImageFile;
-
-  @override
-  void initState() {
-    super.initState();
-    state = AppState.free;
-  }
 
   @override
   Widget build(BuildContext context) {
-//    final String picturePath = ModalRoute.of(context).settings.arguments;
-//    sourceImageFile = File(ModalRoute.of(context).settings.arguments);
-//    imageFile == null ? sourceImageFile : null;
     if (imageFile == null) {
       imageFile = File(ModalRoute.of(context).settings.arguments);
     }
@@ -53,28 +36,11 @@ class CorrectPictureState extends State<CorrectPicture> {
   Future<Null> _cropImage() async {
     File croppedFile = await ImageCropper.cropImage(
         sourcePath: imageFile.path,
-        aspectRatioPresets: Platform.isAndroid
-            ? [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ]
-            : [
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio5x3,
-          CropAspectRatioPreset.ratio5x4,
-          CropAspectRatioPreset.ratio7x5,
-          CropAspectRatioPreset.ratio16x9
-        ],
         androidUiSettings: AndroidUiSettings(
             toolbarTitle: 'Cropper',
-            toolbarColor: Colors.deepOrange,
+            toolbarColor: Colors.blue,
             toolbarWidgetColor: Colors.white,
+            showCropGrid: false,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
         iosUiSettings: IOSUiSettings(
@@ -83,24 +49,7 @@ class CorrectPictureState extends State<CorrectPicture> {
     );
     if (croppedFile != null) {
       imageFile = croppedFile;
-      setState(() {
-        state = AppState.cropped;
-      });
+      setState(() {});
     }
   }
-
 }
-/*
-body: Center(
-child: Image.file(File(picturePath)),
-),
-
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.save),
-        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-          context,
-          widget.routDisplayPicture,
-          (Route<dynamic> route) => false,
-          arguments: picturePath,
-        ),
- */
