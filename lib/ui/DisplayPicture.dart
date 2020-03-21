@@ -7,9 +7,8 @@ import '../Services.dart';
 
 class DisplayPicture extends StatefulWidget{
   final String routInitCamera;
-  final String routCorrectPicture;
 
-  DisplayPicture({this.routInitCamera, this.routCorrectPicture});
+  DisplayPicture({this.routInitCamera});
 
   @override
   DisplayPictureState createState() => DisplayPictureState();
@@ -36,6 +35,15 @@ class DisplayPictureState extends State<DisplayPicture> {
       imageFile = croppedFile;
       setState(() {});
     }
+  }
+
+  Future<void> _recognizeText(BuildContext context) async {
+    final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
+    final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
+    final VisionText visionText = await textRecognizer.processImage(visionImage);
+    String text = visionText.text;
+    viewShowDialog(context, text);
+    textRecognizer.close();
   }
 
   @override
@@ -77,17 +85,6 @@ class DisplayPictureState extends State<DisplayPicture> {
         ),
       );
     }
-  }
-
-  Future<void> _recognizeText(BuildContext context) async {
-    final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
-    final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
-    final VisionText visionText = await textRecognizer.processImage(visionImage);
-    String text = visionText.text;
-    viewShowDialog(context, text);
-    print("Recognizer  text:" + text);
-
-    textRecognizer.close();
   }
 
   Widget _buildTitle(BuildContext context, String picturePath) {

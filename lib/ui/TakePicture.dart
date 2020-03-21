@@ -14,16 +14,6 @@ class TakePicture extends StatefulWidget {
 
 class TakePictureState extends State<TakePicture> {
   CameraController _controller;
-  bool _lampOn = false;
-
-  _setLamp() {
-      if (_lampOn) {
-          _lampOn = false;
-      } else {
-          _lampOn = true;
-      }
-
-  }
 
   @override
   void dispose() {
@@ -35,7 +25,7 @@ class TakePictureState extends State<TakePicture> {
   Widget build(BuildContext context) {
     _controller = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: AppBar(title: _buildTitle(context)),
+      appBar: AppBar(title: Text("Take picture")),
       body: CameraPreview(_controller),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
@@ -47,12 +37,4 @@ class TakePictureState extends State<TakePicture> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-
-  Widget _buildTitle(BuildContext context) {
-    return RaisedButton(
-      onPressed: () => _setLamp(),
-      child: Text('Torch ON/OFF'),
-    );
-  }
-
 }
