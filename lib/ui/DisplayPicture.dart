@@ -2,13 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:image_cropper/image_cropper.dart';
 import '../Services.dart';
 
-class DisplayPicture extends StatelessWidget{
+class DisplayPicture extends StatefulWidget{
   final String routInitCamera;
   final String routCorrectPicture;
 
   DisplayPicture({this.routInitCamera, this.routCorrectPicture});
+
+  @override
+  DisplayPictureState createState() => DisplayPictureState();
+}
+
+class DisplayPictureState extends State<DisplayPicture> {
+  File imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class DisplayPicture extends StatelessWidget{
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.camera_alt),
             onPressed: () {
-              Navigator.pushNamed(context, routInitCamera);
+              Navigator.pushNamed(context, widget.routInitCamera);
             },
           )
       );
@@ -41,7 +49,7 @@ class DisplayPicture extends StatelessWidget{
               child: FloatingActionButton(
                 child: Icon(Icons.camera_alt),
                 onPressed: () {
-                  Navigator.pushNamed(context, routInitCamera);
+                  Navigator.pushNamed(context, widget.routInitCamera);
                 },
               )
           ),
@@ -65,12 +73,12 @@ class DisplayPicture extends StatelessWidget{
   Widget _buildTitle(BuildContext context, String picturePath) {
     return Row(children: <Widget>[
       RaisedButton(
-        onPressed: () => _recognizeText(context, picturePath),
-        child: Text('Recognize text'),
+        onPressed: () => Navigator.pushNamed(context, widget.routInitCamera),
+        child: Text('Take picture'),
       ),
       RaisedButton(
-        onPressed: () => Navigator.pushNamed(context, routCorrectPicture, arguments: picturePath),
-        child: Text('Correct picture'),
+        onPressed: () => _recognizeText(context, picturePath),
+        child: Text('Recognize text'),
       ),
     ]);
   }
