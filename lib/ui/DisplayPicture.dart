@@ -18,24 +18,45 @@ class DisplayPicture extends StatefulWidget{
 class DisplayPictureState extends State<DisplayPicture> {
   File imageFile;
 
+  Future<Null> _cropImage() async {
+    File croppedFile = await ImageCropper.cropImage(
+        sourcePath: imageFile.path,
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.blue,
+            toolbarWidgetColor: Colors.white,
+            showCropGrid: false,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          title: 'Cropper',
+        )
+    );
+    if (croppedFile != null) {
+      imageFile = croppedFile;
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final String picturePath = ModalRoute.of(context).settings.arguments;
 
     if (picturePath != null) {
+      if (imageFile == null) {
+        imageFile = File(picturePath);
+      }
        return Scaffold(
           appBar: AppBar(
               title: _buildTitle(context, picturePath)
           ),
           body: Center(
-            child: Image.file(File(picturePath)),
+            child: Image.file(imageFile),
           ),
           floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.camera_alt),
-            onPressed: () {
-              Navigator.pushNamed(context, widget.routInitCamera);
-            },
-          )
+            child: Icon(Icons.crop),
+            onPressed: () => _cropImage(),
+           )
       );
     } else {
       return Scaffold(
@@ -58,8 +79,7 @@ class DisplayPictureState extends State<DisplayPicture> {
     }
   }
 
-  Future<void> _recognizeText(BuildContext context, String picturePath) async {
-    final File imageFile = File(picturePath);
+  Future<void> _recognizeText(BuildContext context) async {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
     final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
     final VisionText visionText = await textRecognizer.processImage(visionImage);
@@ -77,7 +97,7 @@ class DisplayPictureState extends State<DisplayPicture> {
         child: Text('Take picture'),
       ),
       RaisedButton(
-        onPressed: () => _recognizeText(context, picturePath),
+        onPressed: () => _recognizeText(context),
         child: Text('Recognize text'),
       ),
     ]);
