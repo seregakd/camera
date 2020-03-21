@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CorrectPicture extends StatefulWidget {
   final String routDisplayPicture;
@@ -19,9 +18,10 @@ enum AppState {
   cropped,
 }
 
-class CorrectPictureState extends State<CorrectPicture> with TickerProviderStateMixin{
+class CorrectPictureState extends State<CorrectPicture> {
   AppState state;
   File imageFile;
+//  File sourceImageFile;
 
   @override
   void initState() {
@@ -31,8 +31,12 @@ class CorrectPictureState extends State<CorrectPicture> with TickerProviderState
 
   @override
   Widget build(BuildContext context) {
-    final String picturePath = ModalRoute.of(context).settings.arguments;
-//    imageFile = File(ModalRoute.of(context).settings.arguments);
+//    final String picturePath = ModalRoute.of(context).settings.arguments;
+//    sourceImageFile = File(ModalRoute.of(context).settings.arguments);
+//    imageFile == null ? sourceImageFile : null;
+    if (imageFile == null) {
+      imageFile = File(ModalRoute.of(context).settings.arguments);
+    }
 
     return Scaffold(
       appBar: AppBar(title: Text("Correct picture")),
@@ -40,38 +44,10 @@ class CorrectPictureState extends State<CorrectPicture> with TickerProviderState
         child: imageFile != null ? Image.file(imageFile) : Container(),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepOrange,
-        onPressed: () {
-          if (state == AppState.free)
-            _pickImage();
-          else if (state == AppState.picked)
-            _cropImage();
-          else if (state == AppState.cropped)
-            _clearImage();
-        },
-        child: _buildButtonIcon(),
+        onPressed: () => _cropImage(),
+        child: Icon(Icons.crop),
       ),
     );
-  }
-
-  Widget _buildButtonIcon() {
-    if (state == AppState.free)
-      return Icon(Icons.add);
-    else if (state == AppState.picked)
-      return Icon(Icons.crop);
-    else if (state == AppState.cropped)
-      return Icon(Icons.clear);
-    else
-      return Container();
-  }
-
-  Future<Null> _pickImage() async {
-    imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    if (imageFile != null) {
-      setState(() {
-        state = AppState.picked;
-      });
-    }
   }
 
   Future<Null> _cropImage() async {
@@ -111,13 +87,6 @@ class CorrectPictureState extends State<CorrectPicture> with TickerProviderState
         state = AppState.cropped;
       });
     }
-  }
-
-  void _clearImage() {
-    imageFile = null;
-    setState(() {
-      state = AppState.free;
-    });
   }
 
 }
